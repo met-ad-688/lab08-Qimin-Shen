@@ -9,7 +9,7 @@
 <meta name="author" content="Qimin Shen">
 <meta name="dcterms.date" content="2025-04-11">
 
-<title>Module 05: Lab 02</title>
+<title>Exploring Employment Trends Using Regression Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -104,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Module 05: Lab 02</h1>
+<h1 class="title">Exploring Employment Trends Using Regression Models</h1>
 <p class="subtitle lead">Regression Modeling on Employment Data</p>
 </div>
 
@@ -186,32 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><span class="uured-bold">Copying code from your friend constitutes plagiarism. DO NOT DO THIS</span>.</li>
 </ul></li>
 </ol>
-<div id="cell-3" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"SPARK_HOME"</span>] <span class="op">=</span> <span class="st">"/opt/spark-3.5.5-bin-hadoop3"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"PATH"</span>] <span class="op">=</span> <span class="ss">f"/opt/spark-3.5.5-bin-hadoop3/bin:</span><span class="sc">{</span>os<span class="sc">.</span>environ[<span class="st">'PATH'</span>]<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">"notebook"</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> DoubleType</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> col, when, regexp_extract</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shutil</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.figure_factory <span class="im">as</span> ff </span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> SparkSession.builder <span class="op">\</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    .appName(<span class="st">"LightcastData"</span>) <span class="op">\</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    .getOrCreate()</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>data_path <span class="op">=</span> <span class="st">"/home/xn/lightcast_job_postings.csv"</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.read.option(<span class="st">"header"</span>, <span class="st">"true"</span>).option(<span class="st">"inferSchema"</span>, <span class="st">"true"</span>).option(<span class="st">"multiLine"</span>,<span class="st">"true"</span>).option(<span class="st">"escape"</span>, <span class="st">"</span><span class="ch">\"</span><span class="st">"</span>).csv(data_path)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>df.printSchema() <span class="co"># comment this line when rendering the submission</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>df.show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-3" class="cell" data-execution_count="31">
 <div class="cell-output cell-output-stderr">
 <pre><code>                                                                                </code></pre>
 </div>
@@ -378,31 +353,7 @@ only showing top 5 rows
 <li><strong>Assemble features</strong> into a single vector using <strong>VectorAssembler</strong>.</li>
 <li><strong>Split the data</strong> into training and testing sets.</li>
 </ol>
-<div id="cell-5" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> col</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> StringIndexer, OneHotEncoder, VectorAssembler</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>selected_cols <span class="op">=</span> [<span class="st">"SALARY"</span>, <span class="st">"MIN_YEARS_EXPERIENCE"</span>, <span class="st">"SALARY_FROM"</span>, <span class="st">"EMPLOYMENT_TYPE_NAME"</span>]</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df_clean <span class="op">=</span> df.select(selected_cols).dropna()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>indexer <span class="op">=</span> StringIndexer(inputCol<span class="op">=</span><span class="st">"EMPLOYMENT_TYPE_NAME"</span>, outputCol<span class="op">=</span><span class="st">"EMPLOYMENT_TYPE_INDEX"</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df_indexed <span class="op">=</span> indexer.fit(df_clean).transform(df_clean)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>encoder <span class="op">=</span> OneHotEncoder(inputCol<span class="op">=</span><span class="st">"EMPLOYMENT_TYPE_INDEX"</span>, outputCol<span class="op">=</span><span class="st">"EMPLOYMENT_TYPE_VEC"</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>df_encoded <span class="op">=</span> encoder.fit(df_indexed).transform(df_indexed)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>assembler <span class="op">=</span> VectorAssembler(</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    inputCols<span class="op">=</span>[<span class="st">"MIN_YEARS_EXPERIENCE"</span>, <span class="st">"SALARY_FROM"</span>, <span class="st">"EMPLOYMENT_TYPE_VEC"</span>],</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    outputCol<span class="op">=</span><span class="st">"features"</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>df_final <span class="op">=</span> assembler.transform(df_encoded)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>final_data <span class="op">=</span> df_final.select(col(<span class="st">"features"</span>), col(<span class="st">"SALARY"</span>).alias(<span class="st">"label"</span>))</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>train_data, test_data <span class="op">=</span> final_data.randomSplit([<span class="fl">0.7</span>, <span class="fl">0.3</span>], seed<span class="op">=</span><span class="dv">688</span>)</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>train_data.show(<span class="dv">5</span>)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>test_data.show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-5" class="cell" data-execution_count="32">
 <div class="cell-output cell-output-stderr">
 <pre><code>                                                                                </code></pre>
 </div>
@@ -420,7 +371,7 @@ only showing top 5 rows
 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>[Stage 20:&gt;                                                         (0 + 1) / 1]</code></pre>
+<pre><code>[Stage 62:&gt;                                                         (0 + 1) / 1]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>+--------------------+-----+
@@ -447,7 +398,7 @@ only showing top 5 rows
 <li>Set a random seed for reproducibility.</li>
 <li>You can choose a number for splitting to your liking, justify your choice.</li>
 </ul>
-<div id="cell-7" class="cell" data-execution_count="28">
+<div id="cell-7" class="cell" data-execution_count="33">
 <div class="cell-output cell-output-stderr">
 <pre><code>                                                                                </code></pre>
 </div>
@@ -455,7 +406,7 @@ only showing top 5 rows
 <pre><code>(18999, 2)</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>[Stage 50:&gt;                                                         (0 + 1) / 1]</code></pre>
+<pre><code>[Stage 66:&gt;                                                         (0 + 1) / 1]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(4705, 2)</code></pre>
@@ -476,11 +427,9 @@ only showing top 5 rows
 <li>Create a DataFrame to display the coefficients, standard errors, t-values, p-values, and confidence intervals.</li>
 <li>Interpret the coefficients and their significance and explain the model performance metrics.</li>
 </ul>
-<div id="cell-10" class="cell" data-execution_count="10">
+<div id="cell-10" class="cell" data-execution_count="34">
 <div class="cell-output cell-output-stderr">
-<pre><code>25/04/11 02:12:27 WARN Instrumentation: [feea54db] regParam is zero, which might cause numerical instability and overfitting.
-25/04/11 02:12:31 WARN InstanceBuilder: Failed to load implementation from:dev.ludovic.netlib.blas.JNIBLAS
-25/04/11 02:12:31 WARN InstanceBuilder: Failed to load implementation from:dev.ludovic.netlib.lapack.JNILAPACK
+<pre><code>25/04/11 03:03:14 WARN Instrumentation: [1c81b16c] regParam is zero, which might cause numerical instability and overfitting.
                                                                                 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -488,13 +437,8 @@ only showing top 5 rows
 RMSE: 17326.42176937338
 MAE: 13668.641926030183
 Intercept: 22845.780380124743
-Number of coefficients: 4</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>                                                                                </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+-------------+------------------+--------------------+-------------------+-------------------+-------------------+------------------+
+Number of coefficients: 4
++-------------+------------------+--------------------+-------------------+-------------------+-------------------+------------------+
 |feature_index|       coefficient|      standard_error|            t_value|            p_value|           ci_lower|          ci_upper|
 +-------------+------------------+--------------------+-------------------+-------------------+-------------------+------------------+
 |            0|2683.1576120508757|  40.863560155453946|  65.66137658695315|                0.0|  2603.065034146186|2763.2501899555655|
@@ -515,7 +459,7 @@ Number of coefficients: 4</code></pre>
 <li>Please interpret them in the context of your data and model.</li>
 <li>Feature Names are purposefully not printed in the output. You can use the <code>features</code> variable to print them out.</li>
 </ul>
-<div id="cell-13" class="cell" data-execution_count="11">
+<div id="cell-13" class="cell" data-execution_count="35">
 <div class="cell-output cell-output-stdout">
 <pre><code>+--------------------+------------------+--------------------+-------------------+-------------------+-------------------+------------------+
 |             feature|       coefficient|           std_error|            t_value|            p_value|           ci_lower|          ci_upper|
@@ -542,7 +486,7 @@ Number of coefficients: 4</code></pre>
 <li><strong>Histogram of Residuals</strong></li>
 <li><strong>QQ Plot of Residuals</strong></li>
 </ol>
-<div id="cell-16" class="cell" data-execution_count="26">
+<div id="cell-16" class="cell" data-execution_count="36">
 <div class="cell-output cell-output-stderr">
 <pre><code>                                                                                </code></pre>
 </div>
@@ -561,9 +505,9 @@ Number of coefficients: 4</code></pre>
 <section id="evaluation" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Evaluation</h1>
 <p>The evaluation of the model is crucial to understand its performance. In this section, we will calculate and visualize the following metrics: 1. <strong>R² (Coefficient of Determination)</strong>: Indicates how well the model explains the variance in the target variable. 2. <strong>RMSE (Root Mean Squared Error)</strong>: Measures the average magnitude of the errors between predicted and actual values.</p>
-<div id="cell-20" class="cell" data-execution_count="30">
+<div id="cell-20" class="cell" data-execution_count="37">
 <div class="cell-output cell-output-stderr">
-<pre><code>[Stage 54:&gt;                                                         (0 + 1) / 1]</code></pre>
+<pre><code>[Stage 79:&gt;                                                         (0 + 1) / 1]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R² (R-squared): 0.8412012932179281
@@ -605,9 +549,9 @@ RMSE (Root Mean Squared Error): 17326.42176937338</code></pre>
 <li>Save figures in the <code>_output/</code> folder.</li>
 <li>Commit and push code and output files:</li>
 </ol>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add Lab 08 Salary Prediction models and output"</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add Lab 08 Salary Prediction models and output"</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="3" type="1">
 <li>Submit your GitHub repository link.</li>
 </ol>
